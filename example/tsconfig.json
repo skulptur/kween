@@ -5,6 +5,7 @@
     "module": "commonjs",
     "jsx": "react",
     "moduleResolution": "node",
+    "strict": true,
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
