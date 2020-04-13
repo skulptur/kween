@@ -39,4 +39,14 @@ describe('it', () => {
       getIncrementsArray(numberOfUpdates, stepSize / duration)
     )
   })
+
+  it('can be canceled immediately', () => {
+    // TODO
+    expect(true).toBe(false)
+  })
+
+  it('calls onComplete when done', () => {
+    // TODO
+    expect(true).toBe(false)
+  })
 })

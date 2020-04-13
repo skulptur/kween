@@ -1,20 +1,25 @@
 import { noop } from './utils/noop'
 
-interface LoopProps {
-  duration: number
+export interface PlatformDependencies {
+  getTimeNow: () => number
+  requestFrame: (callback: () => void) => void
+}
+
+export interface LoopOwnProps {
   onUpdate: (value: number) => void
   onComplete?: () => void
-  getTimeNow?: () => number
-  requestFrame?: (callback: () => void) => void
+  duration: number
 }
+
+interface LoopProps extends PlatformDependencies, LoopOwnProps {}
 
 export const loop = ({
   duration,
   onUpdate,
   onComplete = noop,
-  getTimeNow = performance.now,
-  requestFrame = requestAnimationFrame,
-}: LoopProps) => {
+  getTimeNow,
+  requestFrame,
+}: LoopProps): (() => void) => {
   let isActive = true
   let elapsedTime = 0
   const startTime = getTimeNow()
