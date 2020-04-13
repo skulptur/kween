@@ -1,1 +1,2 @@
 export const PI = Math.PI
+export const FRAC_PI_2 = 1.57079632679489661923132169163975144

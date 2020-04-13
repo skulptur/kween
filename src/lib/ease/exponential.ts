@@ -1,4 +1,4 @@
-import { power } from '../math/power'
+import { power } from '../math'
 
 export const exponentialIn = (t: number): number => {
   if (t === 0.0) {

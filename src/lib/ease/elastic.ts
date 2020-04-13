@@ -1,7 +1,5 @@
-import { FRAC_PI_2 } from '../constants/FRAC_PI_2'
-
-import { sine } from '../math'
-import { power } from '../math/power'
+import { FRAC_PI_2 } from '../constants'
+import { sine, power } from '../math'
 
 export const elasticIn = (t: number): number => {
   return sine(13.0 * FRAC_PI_2 * t) * power(2.0, 10.0 * (t - 1.0))
