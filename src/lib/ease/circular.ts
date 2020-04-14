@@ -1,17 +1,14 @@
-import { squareRoot } from '../math'
+import { EasingFunction } from 'lib/types'
+import { pow, sqrt } from './shared'
 
-export const circularIn = (t: number): number => {
-  return 1.0 - squareRoot(1.0 - t * t)
+export const circularIn: EasingFunction = (t) => {
+  return 1 - sqrt(1 - pow(t, 2))
 }
 
-export const circularOut = (t: number): number => {
-  return squareRoot((2.0 - t) * t)
+export const circularOut: EasingFunction = (t) => {
+  return sqrt(1 - pow(t - 1, 2))
 }
 
-export const circularInOut = (t: number): number => {
-  if (t < 0.5) {
-    return 0.5 * (1.0 - squareRoot(1.0 - 4.0 * t * t))
-  } else {
-    return 0.5 * (squareRoot(-(2.0 * t - 3.0) * (2.0 * t - 1.0)) + 1.0)
-  }
+export const circularInOut: EasingFunction = (t) => {
+  return t < 0.5 ? (1 - sqrt(1 - pow(2 * t, 2))) / 2 : (sqrt(1 - pow(-2 * t + 2, 2)) + 1) / 2
 }

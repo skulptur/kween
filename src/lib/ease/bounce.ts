@@ -1,23 +1,24 @@
-export const bounceOut = (t: number): number => {
-  if (t < 4.0 / 11.0) {
-    return (121.0 / 16.0) * t * t
-  } else if (t < 8.0 / 11.0) {
-    return (363.0 / 40.0) * t * t - (99.0 / 10.0) * t + 17.0 / 5.0
-  } else if (t < 9.0 / 10.0) {
-    return (4356.0 / 361.0) * t * t - (35442.0 / 1805.0) * t + 16061.0 / 1805.0
+import { EasingFunction } from 'lib/types'
+
+export const bounceOut: EasingFunction = (t) => {
+  const n1 = 7.5625
+  const d1 = 2.75
+
+  if (t < 1 / d1) {
+    return n1 * t * t
+  } else if (t < 2 / d1) {
+    return n1 * (t -= 1.5 / d1) * t + 0.75
+  } else if (t < 2.5 / d1) {
+    return n1 * (t -= 2.25 / d1) * t + 0.9375
   } else {
-    return (54.0 / 5.0) * t * t - (513.0 / 25.0) * t + 268.0 / 25.0
+    return n1 * (t -= 2.625 / d1) * t + 0.984375
   }
 }
 
-export const bounceIn = (t: number): number => {
-  return 1.0 - bounceOut(1.0 - t)
+export const bounceIn: EasingFunction = (t) => {
+  return 1 - bounceOut(1 - t)
 }
 
-export const bounceInOut = (t: number): number => {
-  if (t < 0.5) {
-    return 0.5 * bounceIn(t * 2.0)
-  } else {
-    return 0.5 * bounceOut(t * 2.0 - 1.0) + 0.5
-  }
+export const bounceInOut: EasingFunction = (t) => {
+  return t < 0.5 ? (1 - bounceOut(1 - 2 * t)) / 2 : (1 + bounceOut(2 * t - 1)) / 2
 }

@@ -1,24 +1,16 @@
-import { sine } from '../math'
-import { PI } from '../constants'
+import { EasingFunction } from 'lib/types'
+import { c1, c2, c3, pow } from './shared'
 
-export const backIn = (t: number): number => {
-  return t * t * t - t * sine(t * PI)
+export const backIn: EasingFunction = (t) => {
+  return c3 * t * t * t - c1 * t * t
 }
 
-export const backOut = (t: number): number => {
-  const f = 1.0 - t
-
-  return 1.0 - f * f * f + f * sine(f * PI)
+export const backOut: EasingFunction = (t) => {
+  return 1 + c3 * pow(t - 1, 3) + c1 * pow(t - 1, 2)
 }
 
-export const backInOut = (t: number): number => {
-  if (t < 0.5) {
-    const f = 2.0 * t
-
-    return 0.5 * (f * f * f - f * sine(f * PI))
-  } else {
-    const f = 2.0 - 2.0 * t
-
-    return 0.5 * (1.0 - (f * f * f - f * sine(f * PI))) + 0.5
-  }
+export const backInOut: EasingFunction = (t) => {
+  return t < 0.5
+    ? (pow(2 * t, 2) * ((c2 + 1) * 2 * t - c2)) / 2
+    : (pow(2 * t - 2, 2) * ((c2 + 1) * (t * 2 - 2) + c2) + 2) / 2
 }

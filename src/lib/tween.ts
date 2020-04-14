@@ -1,9 +1,11 @@
 import { loop, LoopOwnProps, PlatformDependencies } from './loop'
 import { noop } from './utils/noop'
 import { linear } from './ease/linear'
+import { EasingFunction } from 'lib/types'
 
-interface TweenProps extends Partial<PlatformDependencies>, LoopOwnProps {
-  ease?: (t: number) => number
+interface TweenProps extends Partial<PlatformDependencies>, Omit<LoopOwnProps, 'onUpdate'> {
+  ease?: EasingFunction
+  onUpdate: (val: number, progress: number) => void
 }
 
 export const tween = ({
@@ -15,7 +17,7 @@ export const tween = ({
   ...props
 }: TweenProps): (() => void) => {
   return loop({
-    onUpdate: (t) => onUpdate(ease(t)),
+    onUpdate: (progress) => onUpdate(ease(progress), progress),
     onComplete,
     getTimeNow,
     requestFrame,

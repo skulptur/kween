@@ -1,15 +1,14 @@
-export const quadraticIn = (t: number): number => {
+import { EasingFunction } from 'lib/types'
+import { pow } from './shared'
+
+export const quadraticIn: EasingFunction = (t) => {
   return t * t
 }
 
-export const quadraticOut = (t: number): number => {
-  return -t * (t - 2.0)
+export const quadraticOut: EasingFunction = (t) => {
+  return 1 - (1 - t) * (1 - t)
 }
 
-export const quadraticInOut = (t: number): number => {
-  if (t < 0.5) {
-    return 2.0 * t * t
-  } else {
-    return -2.0 * t * t + 4.0 * t - 1.0
-  }
+export const quadraticInOut: EasingFunction = (t) => {
+  return t < 0.5 ? 2 * t * t : 1 - pow(-2 * t + 2, 2) / 2
 }

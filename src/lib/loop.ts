@@ -6,7 +6,7 @@ export interface PlatformDependencies {
 }
 
 export interface LoopOwnProps {
-  onUpdate: (value: number) => void
+  onUpdate: (progress: number) => void
   onComplete?: () => void
   duration: number
 }

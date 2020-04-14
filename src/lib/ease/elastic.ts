@@ -1,18 +1,20 @@
-import { FRAC_PI_2 } from '../constants'
-import { sine, power } from '../math'
+import { EasingFunction } from 'lib/types'
+import { c4, c5, pow, sin } from './shared'
 
-export const elasticIn = (t: number): number => {
-  return sine(13.0 * FRAC_PI_2 * t) * power(2.0, 10.0 * (t - 1.0))
+export const elasticIn: EasingFunction = (t) => {
+  return t === 0 ? 0 : t === 1 ? 1 : -pow(2, 10 * t - 10) * sin((t * 10 - 10.75) * c4)
 }
 
-export const elasticOut = (t: number): number => {
-  return sine(13.0 * FRAC_PI_2 * (t + 1.0)) * power(2.0, 10.0 * t) + 1.0
+export const elasticOut: EasingFunction = (t) => {
+  return t === 0 ? 0 : t === 1 ? 1 : pow(2, -10 * t) * sin((t * 10 - 0.75) * c4) + 1
 }
 
-export const elasticInOut = (t: number): number => {
-  if (t < 0.5) {
-    return 0.5 * sine(13.0 * FRAC_PI_2 * 2.0 * t) * power(2.0, 10.0 * (2.0 * t - 1.0))
-  } else {
-    return 0.5 * sine(13.0 * FRAC_PI_2 * 2.0 * t * power(2.0, 10.0 * (2.0 * t - 1.0)) + 2.0)
-  }
+export const elasticInOut: EasingFunction = (t) => {
+  return t === 0
+    ? 0
+    : t === 1
+    ? 1
+    : t < 0.5
+    ? -(pow(2, 20 * t - 10) * sin((20 * t - 11.125) * c5)) / 2
+    : (pow(2, -20 * t + 10) * sin((20 * t - 11.125) * c5)) / 2 + 1
 }

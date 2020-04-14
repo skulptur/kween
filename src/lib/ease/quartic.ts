@@ -1,19 +1,14 @@
-export const quarticIn = (t: number): number => {
+import { EasingFunction } from 'lib/types'
+import { pow } from './shared'
+
+export const quarticIn: EasingFunction = (t) => {
   return t * t * t * t
 }
 
-export const quarticOut = (t: number): number => {
-  const f = t - 1.0
-
-  return f * f * f * (1.0 - t) + 1.0
+export const quarticOut: EasingFunction = (t) => {
+  return 1 - pow(1 - t, 4)
 }
 
-export const quarticInOut = (t: number): number => {
-  if (t < 0.5) {
-    return 8.0 * t * t * t * t
-  } else {
-    const f = t - 1.0
-
-    return 8.0 * f * f * f * f + 1.0
-  }
+export const quarticInOut: EasingFunction = (t) => {
+  return t < 0.5 ? 8 * t * t * t * t : 1 - pow(-2 * t + 2, 4) / 2
 }

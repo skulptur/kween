@@ -1,29 +1,20 @@
-import { power } from '../math'
+import { EasingFunction } from 'lib/types'
+import { pow } from './shared'
 
-export const exponentialIn = (t: number): number => {
-  if (t === 0.0) {
-    return 0.0
-  } else {
-    return power(2.0, 10.0 * (t - 1.0))
-  }
+export const exponentialIn: EasingFunction = (t) => {
+  return t === 0 ? 0 : pow(2, 10 * t - 10)
 }
 
-export const exponentialOut = (t: number): number => {
-  if (t === 1.0) {
-    return 1.0
-  } else {
-    return 1.0 - power(2.0, 10.0 * t)
-  }
+export const exponentialOut: EasingFunction = (t) => {
+  return t === 1 ? 1 : 1 - pow(2, -10 * t)
 }
 
-export const exponentialInOut = (t: number): number => {
-  if (t === 0.0) {
-    return 0.0
-  } else if (t === 1.0) {
-    return 1.0
-  } else if (t < 0.5) {
-    return 0.5 * power(2.0, 20.0 * t - 10.0)
-  } else {
-    return 0.5 * power(2.0, 20.0 * t + 10.0) + 1.0
-  }
+export const exponentialInOut: EasingFunction = (t) => {
+  return t === 0
+    ? 0
+    : t === 1
+    ? 1
+    : t < 0.5
+    ? pow(2, 20 * t - 10) / 2
+    : (2 - pow(2, -20 * t + 10)) / 2
 }

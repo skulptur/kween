@@ -1,3 +1,5 @@
-export const linear = (t: number): number => {
+import { EasingFunction } from 'lib/types'
+
+export const linear: EasingFunction = (t) => {
   return t
 }
