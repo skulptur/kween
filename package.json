@@ -5,6 +5,8 @@
   "typings": "dist/index.d.ts",
   "name": "kween",
   "author": "skulptur",
+  "description": "Simple tween library written in Typescript",
+  "keywords": ["tween", "typescript", "functional", "ease", "gsap"],
   "module": "dist/kween.esm.js",
   "files": [
     "dist",
