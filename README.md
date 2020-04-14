@@ -14,6 +14,12 @@ Use
 ```typescript
 import { tween, bounceInOut } from 'kween'
 
-
-// TODO: example
+tween({
+  duration: 1000, // in milliseconds
+  ease: bounceInOut,
+  onUpdate: (value, progress) => {
+    // value is eased, progress is linear
+    console.log(value, progress)
+  },
+})
 ```
