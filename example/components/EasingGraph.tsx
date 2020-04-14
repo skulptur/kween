@@ -6,7 +6,8 @@ import { EasingFunction, tween } from '../../src'
 import { drawPoint } from '../utils/drawPoint'
 import { Box, Text } from 'rebass'
 import { setContextScale } from '../utils/setContextScale'
-import { mapRange } from '../utils/mapRange'
+import { mapTweenRange } from '../utils/mapRange'
+import { drawRectangle } from '../utils/drawRectangle'
 
 interface EasingGraphProps {
   label: string
@@ -25,13 +26,19 @@ export const EasingGraph: React.FC<EasingGraphProps> = ({ ease, label, size = 20
 
     const padding = 50
     const dotRadius = 1
+    const x1 = padding
+    const y1 = padding
+    const x2 = size * 2 - padding
+    const y2 = size - padding
+
+    drawRectangle(x1, y1, x2, y2, 'rgb(0,0,0,0.5)', context)
 
     return tween({
       duration: 10000,
       ease,
       onUpdate: (value, progress) => {
-        const x = mapRange(0, 1, padding, size * 2 - padding, progress)
-        const y = mapRange(0, 1, padding, size - padding, 1 - value)
+        const x = mapTweenRange(x1, x2, progress)
+        const y = mapTweenRange(y1, y2, 1 - value)
 
         // TODO: use paths instead of points
         drawPoint(x, y, dotRadius, 'black', context)
@@ -40,7 +47,7 @@ export const EasingGraph: React.FC<EasingGraphProps> = ({ ease, label, size = 20
   }, [])
 
   return (
-    <Box padding={2} margin={5} backgroundColor='primary' sx={{ display: 'inline-block' }}>
+    <Box padding={2} margin={2} backgroundColor='secondaryBg' sx={{ display: 'inline-block' }}>
       <Text>{label}</Text>
       <Box backgroundColor='white' sx={{ display: 'inline-block' }}>
         <Canvas width={size * 2} height={size} ref={canvasRef} />
