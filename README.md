@@ -1,3 +1,6 @@
+<p align="center">
+  <img alt="kween-logo" src="https://github.com/skulptur/kween/blob/master/kween-logo.png?raw=true" width="350">
+</p>
 
 ## Get started
 
