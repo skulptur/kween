@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "name": "kween",
-  "author": "Gustavo Spredemann",
+  "author": "skulptur",
   "module": "dist/kween.esm.js",
   "files": [
     "dist",
