@@ -8,6 +8,7 @@ interface TweenProps extends Partial<PlatformDependencies>, Omit<LoopOwnProps, '
   onUpdate: (val: number, progress: number) => void
 }
 
+// TODO: add from/to functionality
 export const tween = ({
   onComplete = noop,
   getTimeNow = () => performance.now(),
